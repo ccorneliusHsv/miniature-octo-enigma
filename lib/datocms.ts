@@ -1,6 +1,20 @@
-import { GraphQLClient } from "graphql-request";
-export function request({ query, variables, includeDrafts, excludeInvalid }) {
-    const headers = {
+import {GraphQLClient, Variables} from "graphql-request";
+
+type paramType = {
+    query: string
+    variables: Variables
+    includeDrafts?: string
+    excludeInvalid?: string
+}
+
+type headerType = {
+    authorization: string
+    'X-Include-Drafts'?: string
+    'X-Exclude-Invalid'?: string
+}
+export function request({ query, variables, includeDrafts, excludeInvalid } : paramType) {
+
+    const headers: headerType = {
         authorization: `Bearer ${process.env.DATOCMS_READ_ONLY_API_TOKEN}`,
     };
     if (includeDrafts) {
