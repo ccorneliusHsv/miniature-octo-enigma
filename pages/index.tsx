@@ -2,7 +2,7 @@ import {request} from "@/lib/datocms";
 
 
 const HOMEPAGE_QUERY =
-    `query: query {allOffers {id}}`;
+    `query {allOffers {id}}`;
 
 type allOfferReturnType = { allOffers: [{ id: number }] };
 
