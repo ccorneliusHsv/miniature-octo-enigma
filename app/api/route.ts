@@ -17,7 +17,6 @@ const getOffers = cache(async ()=>{
 })
 
 export async function GET() {
-
-const data = getOffers();
+const data = await getOffers();
     return NextResponse.json(data);
 }
