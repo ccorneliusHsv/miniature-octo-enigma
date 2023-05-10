@@ -18,8 +18,6 @@ const getOffers = cache(async () => {
 
 export async function GET(request: Request) {
     const data = await getOffers();
-
-    const response = new Response().status(200).setHeader("cache-Control", "s-maxage=60").json(data);
-    return response;
-    return NextResponse.json(data);
+    
+    return NextResponse.status(200).setHeader("cache-Control", "s-maxage=60").json(data);
 }
