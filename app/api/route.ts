@@ -8,7 +8,7 @@ const HOMEPAGE_QUERY =
 type allOfferReturnType = { allOffers: [{ id: number }] };
 
 
-const getOffers = cache(async ()=>{
+const getOffers = cache(async () => {
     const data = await request({
         query: HOMEPAGE_QUERY,
         variables: {limit: 10}
@@ -16,7 +16,10 @@ const getOffers = cache(async ()=>{
     return data;
 })
 
-export async function GET() {
-const data = await getOffers();
+export async function GET(request: Request) {
+    const data = await getOffers();
+
+    const response = new Response().status(200).setHeader("cache-Control", "s-maxage=60").json(data);
+    return response;
     return NextResponse.json(data);
 }
